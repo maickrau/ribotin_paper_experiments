@@ -16,6 +16,7 @@ minimap2 -t 8 -X -c -x asm5 morphs.fa morphs.fa > alns.paf
 seqwish -s morphs.fa -p alns.paf -g graph.gfa
 GraphAligner -x vg -g graph.gfa -f consensus.fa -a consensus_aln.gaf
 GraphAligner -x vg -g graph.gfa -f seq_18s.fa -f seq_5.8s.fa -f seq_28s.fa -a gene_aln.gaf
+minimap2 -t 8 -c -x asm5 morphs.fa seq_18s.fa seq_5.8s seq_28s > alns_genes_to_morphs.paf
 
 awk '$3=="rRNA"' < morph-annotations.gff3 | grep "18S" | awk '{print $1 "\t" $5-$4 "bp";}' > gene_lengths_18s.txt
 awk '$3=="rRNA"' < morph-annotations.gff3 | grep "5.8S" | awk '{print $1 "\t" $5-$4 "bp";}' > gene_lengths_5.8S.txt
