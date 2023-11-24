@@ -9,7 +9,7 @@ wget -O - https://sra-pub-src-2.s3.amazonaws.com/SRR11292120/m64062_190806_06391
 wget -O - https://sra-pub-src-2.s3.amazonaws.com/SRR11292121/m64062_190803_042216.fastq.1 | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > m64062_190803_042216.fa.gz &
 wget -O - https://sra-pub-src-2.s3.amazonaws.com/SRR11292122/m64062_190807_194840.fastq.1 | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > m64062_190807_194840.fa.gz &
 wget -O - https://sra-pub-src-2.s3.amazonaws.com/SRR11292123/m64062_190804_172951.fastq.1 | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > m64062_190804_172951.fa.gz &
-wget -O - https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/nanopore/rel8-guppy-5.0.7/reads.fastq.gz | zcat | awk 'NR%4==1||NR%4==2' | tr '@' '>' | /projappl/project_2006830/filter_fasta_by_length.py 5000 | gzip > ont_reads_5k.fa.gz &
+wget -O - https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/CHM13/nanopore/rel8-guppy-5.0.7/reads.fastq.gz | zcat | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > ont_reads.fa.gz &
 wait
 cd ..
 
