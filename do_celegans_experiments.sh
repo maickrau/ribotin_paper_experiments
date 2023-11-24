@@ -17,6 +17,8 @@ ribotin-ref -x human -t 8 -i celegans_data/SRR22137523.fa.gz --nano celegans_dat
 # then with a species-specific reference
 # make the c. elegans rDNA reference
 MBG -t 8 -i celegans_data/SRR22137522.fa.gz -i celegans_data/SRR22137523.fa.gz -o mbg-graph.gfa -k 1001 -w 100 -a 1 -u 2 --error-masking=msat -r 15000 -R 4000
+MBG -t 8 -i celegans_data/SRR22137522.fa.gz -o mbg-graph-alt2.gfa -k 1001 -w 100 -a 1 -u 2 --error-masking=msat -r 15000 -R 4000
+MBG -t 8 -i celegans_data/SRR22137523.fa.gz -o mbg-graph-alt1.gfa -k 1001 -w 100 -a 1 -u 2 --error-masking=msat -r 15000 -R 4000
 grep -P '^S' < mbg-graph.gfa | awk '{print ">" $2; print $3;}' > mbg-contigs.fa
 # manually pick the c. elegans rDNA contigs, put them in celegans_rdna_kmers.fa
 ribotin-ref -r celegans_rdna_kmers.fa --approx-morphsize 10000 --morph-cluster-maxedit 10 --morph-recluster-minedit 1 -t 8 -i celegans_data/SRR22137523.fa.gz --nano celegans_data/SRR22137523.fa.gz -o out_ref_alt1
