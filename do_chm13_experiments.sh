@@ -14,9 +14,9 @@ wait
 cd ..
 
 mkdir verkko_asm
-verkko -d verkko_asm --hifi chm13_data/m64062_190803_042216.fa.gz --hifi chm13_data/m64062_190804_172951.fa.gz --hifi chm13_data/m64062_190806_063919.fa.gz --hifi chm13_data/m64062_190807_194840.fa.gz --nano chm13_data/ont_reads_5k.fa.gz --slurm --snakeopts "--jobs 50"
+verkko -d verkko_asm --hifi chm13_data/m64062_190803_042216.fa.gz --hifi chm13_data/m64062_190804_172951.fa.gz --hifi chm13_data/m64062_190806_063919.fa.gz --hifi chm13_data/m64062_190807_194840.fa.gz --nano chm13_data/ont_reads.fa.gz --slurm --snakeopts "--jobs 50"
 
-ribotin-ref -x human -t 8 -i chm13_data/m64062_190803_042216.fa.gz -i chm13_data/m64062_190804_172951.fa.gz -i chm13_data/m64062_190806_063919.fa.gz -i chm13_data/m64062_190807_194840.fa.gz --nano chm13_data/ont_reads_5k.fa.gz -o out_ref
+ribotin-ref -x human -t 8 -i chm13_data/m64062_190803_042216.fa.gz -i chm13_data/m64062_190804_172951.fa.gz -i chm13_data/m64062_190806_063919.fa.gz -i chm13_data/m64062_190807_194840.fa.gz --nano chm13_data/ont_reads.fa.gz -o out_ref
 ribotin-verkko -x human -t 8 -i verkko_asm -o out_verkko_automatic
 
 # manually pick the five rDNA clusters into cluster1.txt cluster2.txt cluster3.txt cluster4.txt cluster5.txt
