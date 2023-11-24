@@ -5,9 +5,9 @@ cd gorilla_experiment
 
 mkdir gorilla_data
 cd gorilla_data
-wget -O - https://genomeark.s3.amazonaws.com/species/Gorilla_gorilla/mGorGor1/genomic_data/pacbio_hifi/m54329U_210319_174352.ccs.Q20.fastq.gz | gunzip | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > m54329U_210319_174352.fa.gz &
-wget -O - https://genomeark.s3.amazonaws.com/species/Gorilla_gorilla/mGorGor1/genomic_data/pacbio_hifi/m64076_210208_175256.Q20.fastq.gz | gunzip | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > m64076_210208_175256.fa.gz &
-wget -O - https://genomeark.s3.amazonaws.com/species/Gorilla_gorilla/mGorGor1/genomic_data/pacbio_hifi/m64076_210213_010909.Q20.fastq.gz | gunzip | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > m64076_210213_010909.fa.gz &
+wget -O - https://genomeark.s3.amazonaws.com/species/Gorilla_gorilla/mGorGor1/genomic_data/pacbio_hifi/m54329U_210319_174352.hifi_reads.fq.gz | gunzip | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > m54329U_210319_174352.fa.gz &
+wget -O - https://genomeark.s3.amazonaws.com/species/Gorilla_gorilla/mGorGor1/genomic_data/pacbio_hifi/m64076_210208_175256.hifi_reads.fq.gz | gunzip | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > m64076_210208_175256.fa.gz &
+wget -O - https://genomeark.s3.amazonaws.com/species/Gorilla_gorilla/mGorGor1/genomic_data/pacbio_hifi/m64076_210213_010909.hifi_reads.fq.gz | gunzip | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > m64076_210213_010909.fa.gz &
 wget -O - https://genomeark.s3.amazonaws.com/species/Gorilla_gorilla/mGorGor1/genomic_data/ont/PAG67391_guppy-6.3.7-sup.fastq.gz | gunzip | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > PAG67391_guppy-6.3.7-sup.fa.gz &
 wget -O - https://genomeark.s3.amazonaws.com/species/Gorilla_gorilla/mGorGor1/genomic_data/ont/PAG68076_guppy-6.3.7-sup.fastq.gz | gunzip | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > PAG68076_guppy-6.3.7-sup.fa.gz &
 wait
