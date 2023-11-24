@@ -1,4 +1,4 @@
-Experiments for ribotin paper
+Experiments for ribotin paper revision
 
 Some steps require manual action.
 Not meant to be run automatically despite the file extension .sh.
