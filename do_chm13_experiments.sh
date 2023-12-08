@@ -23,15 +23,21 @@ ribotin-verkko -x human -t 8 -i verkko_asm -o out_verkko_automatic
 ribotin-verkko -x human -t 8 -i verkko_asm -o out_verkko_manual -c cluster1.txt -c cluster2.txt -c cluster3.txt -c cluster4.txt -c cluster5.txt
 
 mkdir alignments
-minimap2 --eqx -x asm5 -c -t 8 chm13_major_morphs.fa out_ref/morphs.fa > alns_ref_t2t.paf
-minimap2 --eqx -x asm5 -c -t 8 chm13_major_morphs.fa out_verkko_automatic*/morphs.fa > alns_verkko_t2t.paf
-minimap2 --eqx -x asm5 -c -t 8 chm13_major_morphs.fa out_verkko_manual*/morphs.fa > alns_verkkomanual_t2t.paf
-minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_verkko_automatic*/morphs.fa > alns_verkko_ref.paf
-minimap2 --eqx -x asm5 -c -t 8 out_ref/consensus.fa out_ref/morphs.fa > alns_ref_consensus.paf
-minimap2 --eqx -x asm5 -c -t 8 out_verkko_manual0/consensus.fa out_verkko_manual0/morphs.fa > alns_manual0_consensus0.paf
-minimap2 --eqx -x asm5 -c -t 8 out_verkko_manual1/consensus.fa out_verkko_manual1/morphs.fa > alns_manual0_consensus1.paf
-minimap2 --eqx -x asm5 -c -t 8 out_verkko_manual2/consensus.fa out_verkko_manual2/morphs.fa > alns_manual0_consensus2.paf
-minimap2 --eqx -x asm5 -c -t 8 out_verkko_manual3/consensus.fa out_verkko_manual3/morphs.fa > alns_manual0_consensus3.paf
-minimap2 --eqx -x asm5 -c -t 8 out_verkko_manual4/consensus.fa out_verkko_manual4/morphs.fa > alns_manual0_consensus4.paf
+cd alignments
+minimap2 --eqx -x asm5 -c -t 8 ../../chm13_major_morphs.fa ../out_ref/morphs.fa > alns_ref_t2t.paf
+minimap2 --eqx -x asm5 -c -t 8 ../../chm13_major_morphs.fa ../out_verkko_automatic*/morphs.fa > alns_verkko_t2t.paf
+minimap2 --eqx -x asm5 -c -t 8 ../../chm13_major_morphs.fa ../out_verkko_manual*/morphs.fa > alns_verkkomanual_t2t.paf
+minimap2 --eqx -x asm5 -c -t 8 ../out_ref/morphs.fa ../out_verkko_automatic*/morphs.fa > alns_verkko_ref.paf
+minimap2 --eqx -x asm5 -c -t 8 ../out_ref/consensus.fa ../out_ref/morphs.fa > alns_ref_consensus.paf
+minimap2 --eqx -x asm5 -c -t 8 ../out_verkko_manual0/consensus.fa ../out_verkko_manual0/morphs.fa > alns_manual0_consensus0.paf
+minimap2 --eqx -x asm5 -c -t 8 ../out_verkko_manual1/consensus.fa ../out_verkko_manual1/morphs.fa > alns_manual0_consensus1.paf
+minimap2 --eqx -x asm5 -c -t 8 ../out_verkko_manual2/consensus.fa ../out_verkko_manual2/morphs.fa > alns_manual0_consensus2.paf
+minimap2 --eqx -x asm5 -c -t 8 ../out_verkko_manual3/consensus.fa ../out_verkko_manual3/morphs.fa > alns_manual0_consensus3.paf
+minimap2 --eqx -x asm5 -c -t 8 ../out_verkko_manual4/consensus.fa ../out_verkko_manual4/morphs.fa > alns_manual0_consensus4.paf
+
+# to get the matches:
+# awk -F '\t' '$4-$3>$2*0.99&&$9-$8>$7*0.99&&int(substr($13, 6))<int($2)*0.01' < alns_ref_t2t.paf | cut -f 1,6 | less
+# pretty print chm13:
+# awk -F '\t' '$4-$3>$2*0.99&&$9-$8>$7*0.99&&int(substr($13, 6))<int($2)*0.01' < alns_ref_t2t.paf | cut -f 1,6 | awk '{print $2 "\t" $1}' | sort | less
 
 cd ..

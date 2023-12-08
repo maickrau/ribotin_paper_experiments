@@ -36,3 +36,11 @@ minimap2 --eqx -x asm5 -c -t 24 ../out_ref_alt1/consensus.fa ../celegans_data/SR
 minimap2 --eqx -x asm5 -c -t 24 ../out_ref_alt1/consensus.fa ../celegans_data/SRR22137522.fa.gz > alns_alt2reads_to_alt1consensus.paf
 
 cd ..
+
+# test if hifiasm assembles rDNA
+mkdir hifiasm_alt1
+cd hifiasm_alt1
+hifiasm -o alt1.asm -t 24 ../celegans_data/SRR22137523.fa.gz
+minimap2 --eqx -x asm5 -c -t 8 alt1.asm.fa ../out_ref_alt1/morphs.fa > alns_ribotinmorph_to_hifiasmcontigs.paf
+cd ..
+
