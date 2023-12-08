@@ -25,9 +25,14 @@ ribotin-ref -r celegans_rdna_kmers.fa --approx-morphsize 10000 --morph-cluster-m
 ribotin-ref -r celegans_rdna_kmers.fa --approx-morphsize 10000 --morph-cluster-maxedit 10 --morph-recluster-minedit 1 -t 8 -i celegans_data/SRR22137522.fa.gz --nano celegans_data/SRR22137522.fa.gz -o out_ref_alt2
 
 mkdir alignments
-minimap2 --eqx -x asm5 -c -t 8 out_ref_alt1/consensus.fa out_ref_alt1/morphs.fa > alns_ref_consensus_alt1.paf
-minimap2 --eqx -x asm5 -c -t 8 out_ref_alt2/consensus.fa out_ref_alt2/morphs.fa > alns_ref_consensus_alt2.paf
-minimap2 --eqx -x asm5 -c -t 8 out_ref_alt1/consensus.fa out_ref_alt2/consensus.fa > alns_consensus_to_consensus.paf
-minimap2 --eqx -x asm5 -c -t 8 out_ref_alt1/consensus.fa out_ref_alt2/morphs.fa > alns_ref_alt2_to_consensus_alt1.paf
+cd alignments
+minimap2 --eqx -x asm5 -c -t 8 ../out_ref_alt1/consensus.fa out_ref_alt1/morphs.fa > alns_ref_consensus_alt1.paf
+minimap2 --eqx -x asm5 -c -t 8 ../out_ref_alt2/consensus.fa out_ref_alt2/morphs.fa > alns_ref_consensus_alt2.paf
+minimap2 --eqx -x asm5 -c -t 8 ../out_ref_alt1/consensus.fa out_ref_alt2/consensus.fa > alns_consensus_to_consensus.paf
+minimap2 --eqx -x asm5 -c -t 8 ../out_ref_alt1/consensus.fa out_ref_alt2/morphs.fa > alns_ref_alt2_to_consensus_alt1.paf
+
+#estimate copy counts by aligning all reads to consensus
+minimap2 --eqx -x asm5 -c -t 24 ../out_ref_alt1/consensus.fa ../celegans_data/SRR22137523.fa.gz > alns_alt1reads_to_alt1consensus.paf
+minimap2 --eqx -x asm5 -c -t 24 ../out_ref_alt1/consensus.fa ../celegans_data/SRR22137522.fa.gz > alns_alt2reads_to_alt1consensus.paf
 
 cd ..

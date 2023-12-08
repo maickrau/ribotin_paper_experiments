@@ -23,7 +23,7 @@ MBG -t 8 -i arabidopsis_data/CRR302668.fa.gz -o mbg-graph.gfa -k 1001 -w 100 -a 
 grep -P '^S' < mbg-graph.gfa | awk '{print ">" $2; print $3;}' > mbg-contigs.fa
 # manually pick the arabidopsis rDNA contigs, put them in arabidopsis_rdna_kmers.fa
 ribotin-ref -r arabidopsis_rdna_kmers.fa --approx-morphsize 10000 -t 8 -i arabidopsis_data/CRR302668.fa.gz --nano arabidopsis_data/CRR302667.fa.gz -o out_ref
-ribotin-verkko -r arabidopsis_rdna_kmers.fa --approx-morphsize 10000 -t 8 -i verkko_asm -o out_verkko_automatic
+ribotin-verkko --guess-tangles-using-reference arabidopsis_rdna_kmers.fa --approx-morphsize 10000 -t 8 -i verkko_asm -o out_verkko_automatic
 
 # use the hifi reads as "ont" reads as well
 ribotin-ref -r arabidopsis_rdna_kmers.fa --approx-morphsize 10000 -t 8 -i arabidopsis_data/CRR302668.fa.gz --nano arabidopsis_data/CRR302668.fa.gz -o out_ref_hifionly --morph-cluster-maxedit 10 --morph-recluster-minedit 1
