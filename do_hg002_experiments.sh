@@ -13,6 +13,19 @@ wget -O - https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/HG002
 wget -O - https://s3-us-west-2.amazonaws.com/human-pangenomics/T2T/scratch/HG002/sequencing/ont/03_08_22_R941_HG002_2_Guppy_6.0.6_prom_sup.fastq.gz | gunzip | awk 'NR%4==1||NR%4==2' | tr '@' '>' | gzip > 03_08_22_R941_HG002_2_Guppy_6.0.6_prom_sup.fa.gz &
 wait
 
+# estimate ONT and hifi read length distributions
+zcat 03_08_22_R941_HG002_2_Guppy_6.0.6_prom_sup.fa.gz | grep -v '>' | awk '{print length($0);}' > readlens_03_08_22_R941_HG002_2_Guppy_6.0.6_prom_sup.txt
+awk '{sum += $1; count += 1;}END{print sum/count;}' < readlens_03_08_22_R941_HG002_2_Guppy_6.0.6_prom_sup.txt
+# average ONT length 37431.9
+awk '{sum += sqrt(($1-37431.9)*($1-37431.9)); count += 1;}END{print sum/count;}' < readlens_03_08_22_R941_HG002_2_Guppy_6.0.6_prom_sup.txt
+# ONT standard deviation 32111.1
+zcat m64011_190830_220126.Q20.fa.gz | grep -v '>' | awk '{print length($0);}' > readlens_m64011_190830_220126.Q20.txt
+awk '{sum += $1; count += 1;}END{print sum/count;}' < readlens_m64011_190830_220126.Q20.txt
+# average HiFi length 18545.4
+awk '{sum += sqrt(($1-18545.4)*($1-18545.4)); count += 1;}END{print sum/count;}' < readlens_m64011_190830_220126.Q20.txt
+# HiFi standard deviation 1622.27
+
+
 cd ..
 
 verkko -d verkko_asm --hifi hg002_data/m64011_190830_220126.Q20.fa.gz --hifi hg002_data/m64011_190901_095311.Q20.fa.gz --hifi hg002_data/m64012_190920_173625.Q20.fa.gz --nano hg002_data/03_08_22_R941_HG002_1_Guppy_6.0.6_prom_sup.fa.gz --nano hg002_data/03_08_22_R941_HG002_2_Guppy_6.0.6_prom_sup.fa.gz --slurm --snakeopts "--jobs 50"
