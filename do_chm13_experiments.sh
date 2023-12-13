@@ -41,3 +41,15 @@ minimap2 --eqx -x asm5 -c -t 8 ../out_verkko_manual4/consensus.fa ../out_verkko_
 # awk -F '\t' '$4-$3>$2*0.99&&$9-$8>$7*0.99&&int(substr($13, 6))<int($2)*0.01' < alns_ref_t2t.paf | cut -f 1,6 | awk '{print $2 "\t" $1}' | sort | less
 
 cd ..
+
+# also check if hifiasm assemblies contain the morphs
+mkdir hifiasm
+cd hifiasm
+hifiasm -o hifiasm.asm -t 24 --ul ../chm13_data/ont_reads.fa.gz ../chm13_data/m64062_190803_042216.fa.gz ../chm13_data/m64062_190807_194840.fa.gz ../chm13_data/m64062_190804_172951.fa.gz ../chm13_data/m64062_190806_063919.fa.gz
+cd ..
+mkdir check_asm_morphs
+cd check_asm_morphs
+awk '$1=="S"{print ">" $2; print $3;}' < ../hifiasm/hifiasm.asm.bp.p_ctg.gfa > hifiasm_contigs.fa
+cp ../verkko_asm/assembly.fasta verkko_contigs.fa
+minimap2 -x asm5 -t 8 -c --eqx verkko_contigs.fa ../../chm13_major_morphs.fa > alns_major_to_verkko.paf
+minimap2 -x asm5 -t 8 -c --eqx hifiasm_contigs.fa ../../chm13_major_morphs.fa > alns_major_to_hifiasm.paf

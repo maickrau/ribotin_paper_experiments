@@ -33,8 +33,11 @@ verkko -d verkko_asm --hifi hg002_data/m64011_190830_220126.Q20.fa.gz --hifi hg0
 ribotin-ref -x human -t 8 -i hg002_data/m64011_190830_220126.Q20.fa.gz -i hg002_data/m64011_190901_095311.Q20.fa.gz -i hg002_data/m64012_190920_173625.Q20.fa.gz --nano hg002_data/03_08_22_R941_HG002_1_Guppy_6.0.6_prom_sup.fa.gz --nano hg002_data/03_08_22_R941_HG002_2_Guppy_6.0.6_prom_sup.fa.gz -o out_ref
 ribotin-verkko -x human -t 8 -i verkko_asm -o out_verkko_automatic
 
+ribotin-ref -x human -t 8 -i hg002_data/m64011_190830_220126.Q20.fa.gz --nano hg002_data/03_08_22_R941_HG002_1_Guppy_6.0.6_prom_sup.fa.gz -o out_ref_lowcoverage
+
 mkdir alignments
-minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_verkko_automatic*/morphs.fa > alns_verkko_ref.paf
-minimap2 --eqx -x asm5 -c -t 8 out_ref/consensus.fa out_ref/morphs.fa > alns_ref_consensus.paf
+minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_verkko_automatic*/morphs.fa > alignments/alns_verkko_ref.paf
+minimap2 --eqx -x asm5 -c -t 8 out_ref/consensus.fa out_ref/morphs.fa > alignments/alns_ref_consensus.paf
+minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_ref_lowcoverage/morphs.fa > alignments/alns_lowcoverage_to_fullcoverage.paf
 
 cd ..

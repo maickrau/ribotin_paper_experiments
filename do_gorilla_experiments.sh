@@ -31,7 +31,7 @@ ribotin-ref -r gorilla_rdna_kmers.fa --approx-morphsize 45000 -t 8 -i gorilla_da
 ribotin-verkko --guess-tangles-using-reference gorilla_rdna_kmers.fa --approx-morphsize 45000 -t 8 -i verkko_asm -o out_verkko_automatic
 
 mkdir alignments
-minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_verkko_automatic*/morphs.fa > alns_verkko_ref.paf
-minimap2 --eqx -x asm5 -c -t 8 out_ref/consensus.fa out_ref/morphs.fa > alns_ref_consensus.paf
+minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_verkko_automatic*/morphs.fa > alignments/alns_verkko_ref.paf
+minimap2 --eqx -x asm5 -c -t 8 out_ref/consensus.fa out_ref/morphs.fa > alignments/alns_ref_consensus.paf
 
 cd ..
