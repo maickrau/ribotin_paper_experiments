@@ -41,3 +41,8 @@ minimap2 --eqx -x asm5 -c -t 8 out_ref/consensus.fa out_ref/morphs.fa > alignmen
 minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_ref_lowcoverage/morphs.fa > alignments/alns_lowcoverage_to_fullcoverage.paf
 
 cd ..
+
+# average morph length weighted by coverage
+awk -F '_' 'substr($1,1,1)==">"{coverage=substr($2,9);}substr($1,1,1)!=">"{print length($0) "\t" coverage;}' < out_ref/morphs.fa | awk '{sum += $1*$2; div += $2;}END{print sum/div;}'
+# shortest and longest morphs
+grep -v '>' < out_ref/morphs.fa | awk '{print length($0);}' | sort -n | less

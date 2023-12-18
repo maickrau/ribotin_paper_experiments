@@ -8,9 +8,9 @@ cp ../hg002_experiment/out_ref/consensus.fa .
 cp ../hg002_experiment/out_ref/morph-annotations.gff3 .
 
 # get the sequences of the 18s, 5.8s and 28s genes
-grep -v '>' < ribotin_folder/template_seqs/rDNA_one_unit.fasta | tr -d '\n' | head -c 5526 | tail -c 1868 | awk 'BEGIN{print ">KY962518.1_18s"}{print;}' > seq_18s.fa
-grep -v '>' < ribotin_folder/template_seqs/rDNA_one_unit.fasta | tr -d '\n' | head -c 6753 | tail -c 156 | awk 'BEGIN{print ">KY962518.1_5.8s"}{print;}' > seq_5.8s.fa
-grep -v '>' < ribotin_folder/template_seqs/rDNA_one_unit.fasta | tr -d '\n' | head -c 12971 | tail -c 5050 | awk 'BEGIN{print ">KY962518.1_28s"}{print;}' > seq_28s.fa
+grep -v '>' < ../KY962518.1.fa | tr -d '\n' | head -c 5526 | tail -c 1868 | awk 'BEGIN{print ">KY962518.1_18s"}{print;}' > seq_18s.fa
+grep -v '>' < ../KY962518.1.fa | tr -d '\n' | head -c 6753 | tail -c 156 | awk 'BEGIN{print ">KY962518.1_5.8s"}{print;}' > seq_5.8s.fa
+grep -v '>' < ../KY962518.1.fa | tr -d '\n' | head -c 12971 | tail -c 5050 | awk 'BEGIN{print ">KY962518.1_28s"}{print;}' > seq_28s.fa
 
 minimap2 -t 8 -X -c -x asm5 morphs.fa morphs.fa > alns.paf
 seqwish -s morphs.fa -p alns.paf -g graph.gfa
