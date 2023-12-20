@@ -33,4 +33,34 @@ grep -v '>' < morph_seqs_5.8s.fa | sort | uniq -c > gene_alleles_5.8s.txt
 grep -v '>' < morph_seqs_18s.fa | sort | uniq -c > gene_alleles_18s.txt
 grep -v '>' < morph_seqs_28s.fa | sort | uniq -c > gene_alleles_28s.txt
 
+# number of nodes and edges: check with bandage
+
+# variants per locus: count with bandage, get nodes with:
+# grep "3'ETS" < annotation_alns.gaf | cut -f 6 | tr '<>' '\n' | sort | uniq | tr '\n' ',' | less
+# and similarly for "5'ETS", "ITS-1", "ITS-2", "28S", "18S", "5.8S"
+
+# longest stretch without variants
+grep -P '^S' < graph.gfa | cut -f3 | wc -L
+
+# number of bubbles
+../count_bubbles.py graph.gfa
+../count_biallelic_bubbles.py graph.gfa
+
+# length histograms
+awk '$3=="exon"' < morph-annotations.gff3 | grep "18S" | ../parse_annotation_length_and_coverage.py > length_histogram_18S.csv
+awk '$3=="exon"' < morph-annotations.gff3 | grep "5.8S" | ../parse_annotation_length_and_coverage.py > length_histogram_5.8S.csv
+awk '$3=="exon"' < morph-annotations.gff3 | grep "28S" | ../parse_annotation_length_and_coverage.py > length_histogram_28S.csv
+awk '$3=="exon"' < morph-annotations.gff3 | grep "5'ETS" | ../parse_annotation_length_and_coverage.py > length_histogram_5primeETS.csv
+awk '$3=="exon"' < morph-annotations.gff3 | grep "3'ETS" | ../parse_annotation_length_and_coverage.py > length_histogram_3primeETS.csv
+awk '$3=="exon"' < morph-annotations.gff3 | grep "ITS-1" | ../parse_annotation_length_and_coverage.py > length_histogram_ITS-1.csv
+awk '$3=="exon"' < morph-annotations.gff3 | grep "ITS-2" | ../parse_annotation_length_and_coverage.py > length_histogram_ITS-2.csv
+awk '$3=="repeat_region"' < morph-annotations.gff3 | grep "SSR1" | ../parse_annotation_length_and_coverage.py > length_histogram_SSR1.csv
+awk '$3=="repeat_region"' < morph-annotations.gff3 | grep "SSR2" | ../parse_annotation_length_and_coverage.py > length_histogram_SSR2.csv
+awk '$3=="repeat_region"' < morph-annotations.gff3 | grep "SSR3" | ../parse_annotation_length_and_coverage.py > length_histogram_SSR3.csv
+awk '$3=="tandem_repeat"' < morph-annotations.gff3 | grep "TR1" | ../parse_annotation_length_and_coverage.py > length_histogram_TR1.csv
+awk '$3=="tandem_repeat"' < morph-annotations.gff3 | grep "TR2" | ../parse_annotation_length_and_coverage.py > length_histogram_TR2.csv
+awk '$3=="repeat_region"' < morph-annotations.gff3 | grep "similar to Long Repeat 1" | ../parse_annotation_length_and_coverage.py > length_histogram_LR1.csv
+awk '$3=="repeat_region"' < morph-annotations.gff3 | grep "LR2" | ../parse_annotation_length_and_coverage.py > length_histogram_LR2.csv
+
+
 cd ..

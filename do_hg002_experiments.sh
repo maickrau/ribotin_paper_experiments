@@ -39,6 +39,8 @@ mkdir alignments
 minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_verkko_automatic*/morphs.fa > alignments/alns_verkko_ref.paf
 minimap2 --eqx -x asm5 -c -t 8 out_ref/consensus.fa out_ref/morphs.fa > alignments/alns_ref_consensus.paf
 minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_ref_lowcoverage/morphs.fa > alignments/alns_lowcoverage_to_fullcoverage.paf
+minimap2 --eqx -x asm5 -c -t 8 out_verkko_automatic0/consensus.fa out_verkko_automatic0/morphs.fa > alignments/alns_verkko_consensus0.paf
+minimap2 --eqx -x asm5 -c -t 8 out_verkko_automatic1/consensus.fa out_verkko_automatic1/morphs.fa > alignments/alns_verkko_consensus1.paf
 
 cd ..
 

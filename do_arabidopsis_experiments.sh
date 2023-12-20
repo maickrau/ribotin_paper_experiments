@@ -29,9 +29,9 @@ ribotin-verkko --guess-tangles-using-reference arabidopsis_rdna_kmers.fa --appro
 ribotin-ref -r arabidopsis_rdna_kmers.fa --approx-morphsize 10000 -t 8 -i arabidopsis_data/CRR302668.fa.gz --nano arabidopsis_data/CRR302668.fa.gz -o out_ref_hifionly --morph-cluster-maxedit 10 --morph-recluster-minedit 1
 
 mkdir alignments
-minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_verkko_automatic*/morphs.fa > alns_verkko_ref.paf
-minimap2 --eqx -x asm5 -c -t 8 out_ref/consensus.fa out_ref/morphs.fa > alns_ref_consensus.paf
-minimap2 --eqx -x asm5 -c -t 8 out_ref_hifionly/consensus.fa out_ref_hifionly/morphs.fa > alns_ref_consensus_hifionly.paf
+minimap2 --eqx -x asm5 -c -t 8 out_ref/morphs.fa out_verkko_automatic*/morphs.fa > alignments/alns_verkko_ref.paf
+minimap2 --eqx -x asm5 -c -t 8 out_ref/consensus.fa out_ref/morphs.fa > alignments/alns_ref_consensus.paf
+minimap2 --eqx -x asm5 -c -t 8 out_ref_hifionly/consensus.fa out_ref_hifionly/morphs.fa > alignments/alns_ref_consensus_hifionly.paf
 
 cd ..
 
@@ -39,3 +39,5 @@ cd ..
 awk -F '_' 'substr($1,1,1)==">"{coverage=substr($2,9);}substr($1,1,1)!=">"{print length($0) "\t" coverage;}' < out_ref_hifionly/morphs.fa | awk '{sum += $1*$2; div += $2;}END{print sum/div;}'
 # shortest and longest morphs
 grep -v '>' < out_ref_hifionly/morphs.fa | awk '{print length($0);}' | sort -n | less
+# total copy count
+grep '>' < out_ref_hifionly/morphs.fa | cut -d '_' -f 2 | tr -d 'coverage' | awk '{copycount += int($1+14)/28;}END{print copycount;}'
