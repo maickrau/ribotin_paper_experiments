@@ -62,5 +62,6 @@ awk '$3=="tandem_repeat"' < morph-annotations.gff3 | grep "TR2" | ../parse_annot
 awk '$3=="repeat_region"' < morph-annotations.gff3 | grep "similar to Long Repeat 1" | ../parse_annotation_length_and_coverage.py > length_histogram_LR1.csv
 awk '$3=="repeat_region"' < morph-annotations.gff3 | grep "LR2" | ../parse_annotation_length_and_coverage.py > length_histogram_LR2.csv
 
+Rscript ../plot_morph_pangenome_length_histograms.Rscript
 
 cd ..

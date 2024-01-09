@@ -1,0 +1,74 @@
+
+plotone <- function(data, title) {
+hist(data[,1], xlab="length", ylab="coverage", main=title, breaks=min(max(data[,1])-min(data[,1])+1, 20), xlim=c(min(data[,1])-1, max(data[,1])+1))
+}
+
+png("TR1.png")
+data <- read.table("length_histogram_TR1.csv", header=FALSE)
+plotone(data, "TR1")
+dev.off()
+
+png("TR2.png")
+data <- read.table("length_histogram_TR2.csv", header=FALSE)
+plotone(data, "TR2")
+dev.off()
+
+png("SSR1.png")
+data <- read.table("length_histogram_SSR1.csv", header=FALSE)
+plotone(data, "SSR1")
+dev.off()
+
+png("SSR2.png")
+data <- read.table("length_histogram_SSR2.csv", header=FALSE)
+plotone(data, "SSR2")
+dev.off()
+
+png("SSR3.png")
+data <- read.table("length_histogram_SSR3.csv", header=FALSE)
+plotone(data, "SSR3")
+dev.off()
+
+png("LR1.png")
+data <- read.table("length_histogram_LR1.csv", header=FALSE)
+plotone(data, "LR1")
+dev.off()
+
+png("LR2.png")
+data <- read.table("length_histogram_LR2.csv", header=FALSE)
+plotone(data, "LR2")
+dev.off()
+
+png("ITS-1.png")
+data <- read.table("length_histogram_ITS-1.csv", header=FALSE)
+plotone(data, "ITS-1")
+dev.off()
+
+png("ITS-2.png")
+data <- read.table("length_histogram_ITS-2.csv", header=FALSE)
+plotone(data, "ITS-2")
+dev.off()
+
+png("5primeETS.png")
+data <- read.table("length_histogram_5primeETS.csv", header=FALSE)
+plotone(data, "5'ETS")
+dev.off()
+
+png("3primeETS.png")
+data <- read.table("length_histogram_3primeETS.csv", header=FALSE)
+plotone(data, "3'ETS")
+dev.off()
+
+png("5.8S.png")
+data <- read.table("length_histogram_5.8S.csv", header=FALSE)
+plotone(data, "5.8S")
+dev.off()
+
+png("18S.png")
+data <- read.table("length_histogram_18S.csv", header=FALSE)
+plotone(data, "18S")
+dev.off()
+
+png("28S.png")
+data <- read.table("length_histogram_28S.csv", header=FALSE)
+plotone(data, "28S")
+dev.off()

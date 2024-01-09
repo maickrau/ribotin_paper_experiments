@@ -49,6 +49,8 @@ awk -F '_' 'substr($1,1,1)==">"{coverage=substr($2,9);}substr($1,1,1)!=">"{print
 grep -v '>' < out_ref/morphs.fa | awk '{print length($0);}' | sort -n | less
 # ribotin-ref edit distances vs matched CHM13 morphs
 awk -F '\t' '$4-$3>$2*0.99&&$9-$8>$7*0.99&&int(substr($13, 6))<int($2)*0.01' < alignments/alns_ref_t2t.paf | cut -f 1,6,13 | grep -v 'coverage[12][0-9]\b' | grep -v 'coverage[0-9]\b' | less
+# ribotin-verkko manual tangles edit distances vs matched CHM13 morphs
+awk -F '\t' '$4-$3>$2*0.99&&$9-$8>$7*0.99&&int(substr($13, 6))<int($2)*0.01' < alignments/alns_verkkomanual_t2t.paf | cut -f 1,6,13 | grep -v 'coverage[12][0-9]\b' | grep -v 'coverage[0-9]\b' | less
 
 # also check if hifiasm assemblies contain the morphs
 mkdir hifiasm

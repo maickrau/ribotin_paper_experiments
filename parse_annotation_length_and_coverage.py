@@ -17,6 +17,8 @@ for l in sys.stdin:
 lengths = [l for l in count_per_length.keys()]
 lengths.sort()
 
-print("length,coverage")
+#print("length,coverage")
 for length in lengths:
-	print(str(length) + "," + str(count_per_length[length]))
+	for i in range(0, count_per_length[length]):
+		print(length)
+	#print(str(length) + "," + str(count_per_length[length]))
