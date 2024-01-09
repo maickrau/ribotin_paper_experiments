@@ -12,3 +12,5 @@ Order:
 - do_gorilla_experiments.sh
 - do_hg002_experiments.sh
 - do_morph_pangenome_experiment.sh
+- do_celegans_experiments.sh
+- do_simulated_experiment.sh
